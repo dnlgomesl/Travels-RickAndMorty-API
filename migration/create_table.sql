@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS travel_plans (id SERIAL PRIMARY KEY, travel_stops INT[]);

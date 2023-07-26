@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  database:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mtb
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./migration/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+    networks:
+        - myNetwork
+
+  api:
+    container_name: api
+    image: mtb-image
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - database
+    restart: unless-stopped
+    volumes:
+      - ./:/app:cached
+    ports:
+      - 3000:3000
+    networks:
+        - myNetwork
+
+networks:
+    myNetwork:
+        driver: bridge

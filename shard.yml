@@ -1,0 +1,23 @@
+name: app
+version: 0.1.0
+
+authors:
+  - dnlgomesl <daniel.gomes.lima@ccc.ufcg.edu.br>
+
+targets:
+  app:
+    main: src/app.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  db:
+    github: crystal-lang/crystal-db
+  pg:
+    github: will/crystal-pg
+  crystal-gql:
+    github: itsezc/crystal-gql
+
+crystal: 1.8.2
+
+license: MIT
